@@ -14,6 +14,37 @@
     <button type="submit">Submit</button>
 </form>
 
+<script>
+    const contactForm = document.getElementById('contact-form');
+    const infoDisplay = document.getElementById('info-display');
+
+    contactForm.onsubmit = (e) => {
+        e.preventDefault();
+
+        // Get values from the form
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+
+        // Save the info locally (for now)
+        localStorage.setItem('ownerName', name);
+        localStorage.setItem('ownerPhone', phone);
+
+        // Display the saved info
+        infoDisplay.innerHTML = `<p>Name: ${name}<br>Phone: ${phone}</p>`;
+
+        // Hide the form after submission
+        contactForm.style.display = 'none';
+    };
+
+    // Check if info exists and display it
+    const savedName = localStorage.getItem('ownerName');
+    const savedPhone = localStorage.getItem('ownerPhone');
+    if (savedName && savedPhone) {
+        infoDisplay.innerHTML = `<p>Name: ${savedName}<br>Phone: ${savedPhone}</p>`;
+        contactForm.style.display = 'none';
+    }
+</script>
+
 <h2>Owner's Contact Information</h2>
 <div id="info-display">
     <!-- This will show the stored contact info -->
